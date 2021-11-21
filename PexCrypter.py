@@ -17,18 +17,18 @@ def encrypt(bool):
     fileName = input('Enter file name: ')
     password = input('Enter encryption key: ')
     char32 = turnInto32Byte(password)
-    pexcript = Fernet(base64.urlsafe_b64encode(char32))
+    PexCrypter = Fernet(base64.urlsafe_b64encode(char32))
     with open(fileName, "rb") as f:
         data = f.read()
     
     if(bool):
-        encryptedData = pexcript.encrypt(data)
+        encryptedData = PexCrypter.encrypt(data)
         with open(fileName, "wb") as f:
             f.write(encryptedData)
         return
 
     try:
-        decryptedData = pexcript.decrypt(data)
+        decryptedData = PexCrypter.decrypt(data)
         with open(fileName, "wb") as f:
             f.write(decryptedData)
     except:
