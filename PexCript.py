@@ -12,26 +12,20 @@ def turnInto32Byte(password):
     char32 = str.encode(char32)
     return char32
 
-def encrypt():
+
+def encrypt(bool):
     fileName = input('Enter file name: ')
     password = input('Enter encryption key: ')
     char32 = turnInto32Byte(password)
     pexcript = Fernet(base64.urlsafe_b64encode(char32))
     with open(fileName, "rb") as f:
         data = f.read()
-
-    encryptedData = pexcript.encrypt(data)
     
-    with open(fileName, "wb") as f:
-        f.write(encryptedData)
-
-def decrypt():
-    fileName = input('Enter file name: ')
-    password = input('Enter decryption key: ')
-    char32 = turnInto32Byte(password)
-    pexcript = Fernet(base64.urlsafe_b64encode(char32))
-    with open(fileName, "rb") as f:
-        data = f.read()
+    if(bool):
+        encryptedData = pexcript.encrypt(data)
+        with open(fileName, "wb") as f:
+            f.write(encryptedData)
+        return
 
     try:
         decryptedData = pexcript.decrypt(data)
@@ -39,6 +33,8 @@ def decrypt():
             f.write(decryptedData)
     except:
         print('\nDecryption key error!')
+
+
 
 def main():
     choice = 1
@@ -50,9 +46,9 @@ def main():
         print('0. Exit')
         choice = int(input('Enter choice: '))
         if choice==1:
-            encrypt()
+            encrypt(True)
         elif choice==2:
-            decrypt()
+            encrypt(False)
         elif choice>2:
             print('Invalid choice.')
 
