@@ -1,0 +1,6 @@
+{
+  "scripts": {
+    "restore": "powershell cp '.\\`[BU`] passwords.json' '.\\passwords.json'",
+    "start": "powershell  python '.\\PexCript.py'"
+  }
+}
